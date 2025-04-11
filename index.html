@@ -28,6 +28,8 @@
 
         .card-container {
             perspective: 1000px; /* For the flip effect */
+            width: 90%;
+            max-width: 600px;
         }
 
         .card {
@@ -40,6 +42,8 @@
             animation: cardEntrance 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
             opacity: 0;
             transform: translateY(-50px) rotateX(-10deg);
+            width: 100%;
+            box-sizing: border-box; /* Ensure padding doesn't increase the overall width */
         }
 
         @keyframes cardEntrance {
@@ -140,6 +144,82 @@
             bottom: -100px; /* Move it off-screen */
             left: -100px;
         }
+
+        /* Adjustments for smaller screens (phones) */
+        @media (max-width: 600px) {
+            .birthday-greeting {
+                font-size: 2em;
+                margin-bottom: 0.5em;
+            }
+            .name-reveal {
+                font-size: 2.5em;
+                margin-bottom: 1em;
+                border-right: .1em solid #1976d2; /* Adjust cursor thickness */
+            }
+            @keyframes typing {
+                from { width: 0 }
+                to { width: 100% }
+            }
+            .heart {
+                font-size: 1.5em;
+                margin: 0 0.3em;
+            }
+            .wishes-message {
+                font-size: 1.25em;
+            }
+            .card {
+                padding: 2em;
+                border-radius: 15px;
+            }
+            .star {
+                width: 8px;
+                height: 8px;
+                box-shadow: 0 0 3px #ffeb3b;
+            }
+        }
+
+        /* More specific adjustments for even smaller screens */
+        @media (max-width: 400px) {
+            .birthday-greeting {
+                font-size: 1.75em;
+                margin-bottom: 0.4em;
+            }
+            .name-reveal {
+                font-size: 2.2em; /* Slightly smaller for very narrow screens */
+                border-right: .08em solid #1976d2; /* Thinner cursor */
+            }
+            @keyframes typing {
+                from { width: 0 }
+                to { width: 95% } /* Typing stops a bit earlier */
+            }
+            .heart {
+                font-size: 1.2em;
+                margin: 0 0.2em;
+            }
+            .wishes-message {
+                font-size: 1.1em;
+            }
+            .card {
+                padding: 1.5em;
+                border-radius: 10px;
+            }
+            .star {
+                width: 6px;
+                height: 6px;
+                box-shadow: 0 0 2px #ffeb3b;
+            }
+        }
+
+        /* Tiny adjustment for the name and emoji on the narrowest screens */
+        @media (max-width: 350px) {
+            .name-reveal {
+                font-size: 2em; /* Even smaller for the narrowest screens */
+            }
+            @keyframes typing {
+                from { width: 0 }
+                to { width: 90% } /* Typing stops a bit earlier on the narrowest screens */
+            }
+        }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
 </head>
@@ -147,7 +227,7 @@
     <div class="card-container">
         <div class="card">
             <div class="birthday-greeting">Happy Birthday</div>
-            <div class="name-reveal">Our Favorite Teacher, Miss Fatima😍</div>
+            <div class="name-reveal">Our Favorite Teacher <br> Miss Fatima😍</div>
             <div class="heart-container">
                 <span class="heart">&hearts;</span>
                 <span class="heart">&hearts;</span>
@@ -161,7 +241,7 @@
 
     <script>
         function createStars() {
-            for (let i = 0; i < 50; i++) {
+            for (let i = 0; i < 30; i++) { /* Adjust star count as needed */
                 const star = document.createElement('div');
                 star.classList.add('star');
                 star.style.top = `${Math.random() * 100}vh`;
@@ -174,13 +254,11 @@
 
         window.onload = createStars;
 
-        // Function to ensure audio plays on devices with autoplay restrictions
         function playBirthdayTune() {
             const audio = document.getElementById('birthdayTune');
             if (audio) {
                 audio.play().catch(error => {
                     console.error("Autoplay prevented:", error);
-                    Optionally, display 
                     const playButton = document.createElement('button');
                     playButton.innerText = 'Play Birthday Music';
                     playButton.style.position = 'fixed';
@@ -192,10 +270,7 @@
             }
         }
 
-        // Call the function on a user interaction (e.g., a click) or after a delay
         document.addEventListener('click', playBirthdayTune);
-        // Or you can try playing after a short delay as well
-        // setTimeout(playBirthdayTune, 1500);
     </script>
 </body>
 </html>
