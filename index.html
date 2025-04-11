@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Birthday Wish for Miss Fatima!</title>
+    <style>
+        body {
+            font-family: 'Dancing Script', cursive; /* A beautiful script font */
+            margin: 0;
+            background: linear-gradient(45deg, #ffdd59, #ffa726, #f44336, #e91e63);
+            background-size: 400% 400%;
+            animation: fancyGradient 12s ease infinite alternate;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        @keyframes fancyGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .card-container {
+            perspective: 1000px; /* For the flip effect */
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 4em;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            transform-style: preserve-3d; /* Enable 3D transformations for the flip */
+            animation: cardEntrance 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            opacity: 0;
+            transform: translateY(-50px) rotateX(-10deg);
+        }
+
+        @keyframes cardEntrance {
+            from { opacity: 0; transform: translateY(-50px) rotateX(-10deg); }
+            to { opacity: 1; transform: translateY(0) rotateX(0deg); }
+        }
+
+        .birthday-greeting {
+            font-size: 3em;
+            color: #d84315; /* A warm, inviting color */
+            margin-bottom: 0.75em;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            animation: scaleUp 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards 0.5s;
+            transform: scale(0.8);
+            opacity: 0;
+        }
+
+        @keyframes scaleUp {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .name-reveal {
+            font-size: 3.5em;
+            color: #1976d2; /* A strong, memorable blue */
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+            margin-bottom: 1.25em;
+            overflow: hidden; /* For the typing effect */
+            white-space: nowrap;
+            border-right: .15em solid #1976d2; /* Cursor effect */
+            animation: typing 3s steps(30, end) forwards 1s,
+                       blink-caret .75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #1976d2; }
+        }
+
+        .heart-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1.5em;
+            animation: pulseHearts 2s ease-in-out infinite 2s;
+        }
+
+        @keyframes pulseHearts {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .heart {
+            color: #e91e63;
+            font-size: 2em;
+            margin: 0 0.5em;
+        }
+
+        .wishes-message {
+            font-size: 1.75em;
+            color: #43a047; /* A vibrant green */
+            animation: slideUpFadeIn 1.2s ease-out forwards 3s;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        @keyframes slideUpFadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .star {
+            position: absolute;
+            background-color: #ffeb3b;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            box-shadow: 0 0 5px #ffeb3b;
+            opacity: 0;
+            animation: twinkle 2s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+            100% { opacity: 0; transform: scale(0.8); }
+        }
+
+        /* Style to visually hide the audio player */
+        audio {
+            position: fixed;
+            bottom: -100px; /* Move it off-screen */
+            left: -100px;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="card-container">
+        <div class="card">
+            <div class="birthday-greeting">Happy Birthday</div>
+            <div class="name-reveal">Our Favorite Teacher, Miss Fatima😍</div>
+            <div class="heart-container">
+                <span class="heart">&hearts;</span>
+                <span class="heart">&hearts;</span>
+                <span class="heart">&hearts;</span>
+            </div>
+            <div class="wishes-message">May your day be as wonderful as you are!</div>
+        </div>
+    </div>
+
+    <audio id="birthdayTune" src="happy_birthday.mp3" autoplay loop></audio>
+
+    <script>
+        function createStars() {
+            for (let i = 0; i < 50; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                star.style.top = `${Math.random() * 100}vh`;
+                star.style.left = `${Math.random() * 100}vw`;
+                star.style.animationDelay = `${Math.random() * 2}s`;
+                star.style.animationDuration = `${Math.random() * 1.5 + 1}s`;
+                document.body.appendChild(star);
+            }
+        }
+
+        window.onload = createStars;
+
+        // Function to ensure audio plays on devices with autoplay restrictions
+        function playBirthdayTune() {
+            const audio = document.getElementById('birthdayTune');
+            if (audio) {
+                audio.play().catch(error => {
+                    console.error("Autoplay prevented:", error);
+                    Optionally, display 
+                    const playButton = document.createElement('button');
+                    playButton.innerText = 'Play Birthday Music';
+                    playButton.style.position = 'fixed';
+                    playButton.style.bottom = '20px';
+                    playButton.style.left = '20px';
+                    playButton.addEventListener('click', () => audio.play());
+                    document.body.appendChild(playButton);
+                });
+            }
+        }
+
+        // Call the function on a user interaction (e.g., a click) or after a delay
+        document.addEventListener('click', playBirthdayTune);
+        // Or you can try playing after a short delay as well
+        // setTimeout(playBirthdayTune, 1500);
+    </script>
+</body>
+</html>
